@@ -1,12 +1,9 @@
-import { combineReducers } from 'redux'
-
-import product from './product'
-import ui from './ui'
-
-const createRootReducer = () =>
-  combineReducers({
-    product,
-    ui,
-  })
-
-export default createRootReducer
+const initState = {
+  testName: '',
+}
+export default function rootReducer(state = initState, action: any) {
+  switch (action.type) {
+  default:
+    return state
+  }
+}

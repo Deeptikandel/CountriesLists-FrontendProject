@@ -1,0 +1,11 @@
+.cart {
+  position: absolute;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  top: 70px;
+  right: 0;
+  background-color: red;
+}
