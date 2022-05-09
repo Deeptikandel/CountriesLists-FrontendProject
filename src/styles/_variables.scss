@@ -1,0 +1,18 @@
+//normalize
+@import './base';
+
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Roboto&display=swap');
+
+//sizes
+$max-width: 1040px;
+:root {
+  font-size: 12px;
+  font-weight: weight(regular);
+}
+
+//variables
+$primary: rgb(85, 18, 220);
+$primary-hover: rgb(54, 4, 154);
+$button: rgb(127, 8, 8);
+$font: rgb(255, 215, 215);
