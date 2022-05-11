@@ -1,31 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Routes from './Routes'
-import { createTheme } from '@material-ui/core'
-import { ThemeProvider } from '@material-ui/styles'
 
-const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     // main: themeColor,
-  //     dark: '#f09c01',
-  //   },
-  //   secondary: {
-  //     main: '#11cb5f',
-  //   },
-  //   text: {
-  //     primary: '#373585',
-  //     secondary: '#a4a6b3',
-  //   },
-  //   background: { default: '#f7f8fc' },
-  // },
-})
+import { ThemeContext, themes } from './context/context'
 
 export default function App() {
+  const [context, setContext] = useState({
+    colorTheme: themes.primary,
+    switchTheme: (newTheme: { color: string; code: string }) => {
+      setContext((current) => ({
+        ...current,
+        colorTheme: newTheme,
+      }))
+    },
+  })
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeContext.Provider value={context}>
       <div className="App">
         <Routes />
       </div>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   )
 }

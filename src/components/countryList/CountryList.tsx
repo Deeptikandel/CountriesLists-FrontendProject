@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -6,11 +6,12 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import './countryList.scss'
 import { AppState } from '../../types/Types'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCountries, addCountryCart } from '../../redux/actions'
+import { ThemeContext } from '../../context/context'
 
 export default function CountryList() {
   const countries = useSelector(
@@ -20,7 +21,7 @@ export default function CountryList() {
     (state: AppState) => state.countryReducer.isLoading
   )
   const dispatch = useDispatch()
-
+  const { colorTheme } = useContext(ThemeContext)
   React.useEffect(() => {
     dispatch(fetchAllCountries())
   }, [dispatch])
@@ -38,12 +39,13 @@ export default function CountryList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isLoading && <h2>Loading...</h2>}
+          {isLoading && <Typography>Loading...</Typography>}
           {!isLoading &&
             countries &&
-            countries.map((country: any) => (
+            countries.map((country: any, index) => (
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                key={index}
               >
                 <TableCell component="th" scope="row">
                   <img
@@ -65,6 +67,7 @@ export default function CountryList() {
                     className="button"
                     variant="contained"
                     color="primary"
+                    style={{ backgroundColor: colorTheme.code }}
                     onClick={() => dispatch(addCountryCart(country))}
                   >
                     ADD

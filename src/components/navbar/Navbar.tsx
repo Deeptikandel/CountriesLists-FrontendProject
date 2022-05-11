@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { alpha, styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
@@ -17,9 +17,10 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import SearchIcon from '@mui/icons-material/Search'
 import { Badge, InputBase } from '@mui/material'
-import Cart from '../cart/Cart'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../types/Types'
+import CartList from '../cart/Cart'
+import { ThemeContext, themes } from '../../context/context'
 
 const drawerWidth = 240
 
@@ -116,7 +117,7 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false)
   const [toggle, setToggle] = React.useState(false)
   const cart = useSelector((state: AppState) => state.cartReducer.cart)
-
+  const { colorTheme, switchTheme } = useContext(ThemeContext)
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -128,7 +129,11 @@ export default function Navbar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        style={{ backgroundColor: colorTheme.code }}
+        position="fixed"
+        open={open}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -159,11 +164,7 @@ export default function Navbar() {
             </Badge>
           </IconButton>
 
-          {toggle && (
-            <div className="cart-list">
-              <Cart />
-            </div>
-          )}
+          {toggle && <CartList />}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -193,20 +194,28 @@ export default function Navbar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Red', 'Green', 'Blue', 'Black'].map((text, index) => (
-            <ListItem button key={text}>
-              <div
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  marginRight: '20px',
-                  backgroundColor: `${text}`,
+          {[themes.primary, themes.secondary, themes.third, themes.fourth].map(
+            (item) => (
+              <ListItem
+                button
+                key={item.color}
+                onClick={() => {
+                  switchTheme({ color: item.color, code: item.code })
                 }}
-              ></div>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+              >
+                <div
+                  style={{
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                    marginRight: '20px',
+                    backgroundColor: `${item.code}`,
+                  }}
+                ></div>
+                <ListItemText primary={item.color} />
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
       <Main open={open}>
