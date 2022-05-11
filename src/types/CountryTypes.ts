@@ -2,6 +2,16 @@ export const FETCH_COUNTRIES_LOADING = 'FETCH_COUNTRIES_LOADING'
 export const FETCH_COUNTRIES_SUCCESS = 'FETCH_COUNTRIES_SUCCESS'
 export const FETCH_COUNTRIES_FAILURE = 'FETCH_COUNTRIES_FAILURE'
 
+export type Country = {
+  id?: string
+  country: string
+  name: string
+  region: string
+  flag: string
+  population: string
+  language: string[]
+}
+
 export type CountryReducerState = {
   countries: []
   isLoading: boolean

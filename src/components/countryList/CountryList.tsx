@@ -12,16 +12,38 @@ import { AppState } from '../../types/Types'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCountries, addCountryCart } from '../../redux/actions'
 import { ThemeContext } from '../../context/context'
+import { Country } from '../../types/CountryTypes'
 
-export default function CountryList() {
+type countryListProps = {
+  searchKey: string
+}
+export default function CountryList({ searchKey }: countryListProps) {
+  //getting all countries form redux
   const countries = useSelector(
     (state: AppState) => state.countryReducer.countries
   )
   const isLoading = useSelector(
     (state: AppState) => state.countryReducer.isLoading
   )
+
+  const [filteredCountries, setFilteredCountries] = React.useState(countries)
+
+  React.useEffect(() => {
+    setFilteredCountries(countries)
+  }, [countries])
+
+  //filter country by keyword
+  React.useEffect(() => {
+    const searchedCountries: any = countries.filter((country: Country) =>
+      country.name.toLowerCase().includes(searchKey.toLowerCase())
+    )
+    setFilteredCountries(searchedCountries)
+  }, [searchKey, countries])
+
+  //init dispatch
   const dispatch = useDispatch()
   const { colorTheme } = useContext(ThemeContext)
+  //disptach fetch all countries
   React.useEffect(() => {
     dispatch(fetchAllCountries())
   }, [dispatch])
@@ -41,8 +63,8 @@ export default function CountryList() {
         <TableBody>
           {isLoading && <Typography>Loading...</Typography>}
           {!isLoading &&
-            countries &&
-            countries.map((country: any, index) => (
+            filteredCountries &&
+            filteredCountries.map((country: any, index) => (
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 key={index}

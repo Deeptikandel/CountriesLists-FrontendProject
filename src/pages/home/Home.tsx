@@ -5,6 +5,12 @@ import Navbar from '../../components/navbar/Navbar'
 import { fetchAllCountries } from '../../redux/actions'
 
 const Home = () => {
+  const [searchKey, setSearchKey] = React.useState('')
+  //handlechange event
+
+  const handleSearch = (value: string) => {
+    setSearchKey(value)
+  }
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -13,8 +19,8 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <CountryList />
+      <Navbar handleSearch={handleSearch} />
+      <CountryList searchKey={searchKey} />
     </>
   )
 }

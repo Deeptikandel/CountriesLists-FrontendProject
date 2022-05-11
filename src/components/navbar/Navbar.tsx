@@ -112,7 +112,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-export default function Navbar() {
+type navBarProps = {
+  handleSearch: Function
+}
+
+export default function Navbar({ handleSearch }: navBarProps) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   const [toggle, setToggle] = React.useState(false)
@@ -126,6 +130,9 @@ export default function Navbar() {
     setOpen(false)
   }
 
+  const handleChange = (e: any) => {
+    handleSearch(e.target.value)
+  }
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -152,6 +159,7 @@ export default function Navbar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              onChange={handleChange}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
