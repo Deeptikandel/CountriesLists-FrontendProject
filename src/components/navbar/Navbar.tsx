@@ -150,11 +150,7 @@ export default function Navbar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
 
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
+          <IconButton size="large" aria-label="show new items" color="inherit">
             <Badge badgeContent={4} color="error">
               <AddShoppingCartIcon onClick={() => setToggle(!toggle)} />
             </Badge>
@@ -194,12 +190,14 @@ export default function Navbar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Red', 'Green', 'Blue', 'Yellow'].map((text, index) => (
+          {['Red', 'Green', 'Blue', 'Black'].map((text, index) => (
             <ListItem button key={text}>
               <div
                 style={{
                   width: '30px',
                   height: '30px',
+                  borderRadius: '50%',
+                  marginRight: '20px',
                   backgroundColor: `${text}`,
                 }}
               ></div>
