@@ -137,7 +137,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Show Countries
+            World Countries
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -196,6 +196,13 @@ export default function Navbar() {
         <List>
           {['Red', 'Green', 'Blue', 'Yellow'].map((text, index) => (
             <ListItem button key={text}>
+              <div
+                style={{
+                  width: '30px',
+                  height: '30px',
+                  backgroundColor: `${text}`,
+                }}
+              ></div>
               <ListItemText primary={text} />
             </ListItem>
           ))}
