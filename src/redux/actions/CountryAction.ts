@@ -5,7 +5,6 @@ import {
   FETCH_COUNTRIES_SUCCESS,
   FETCH_COUNTRIES_FAILURE,
   CountryActions,
-  // FetchAllCountriesAction,
 } from '../../types/Types'
 
 //fetch all countries

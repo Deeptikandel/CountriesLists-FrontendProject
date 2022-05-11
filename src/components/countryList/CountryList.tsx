@@ -10,7 +10,7 @@ import { Button } from '@mui/material'
 import './countryList.scss'
 import { AppState } from '../../types/Types'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllCountries } from '../../redux/actions'
+import { fetchAllCountries, addCountryCart } from '../../redux/actions'
 
 export default function CountryList() {
   const countries = useSelector(
@@ -65,6 +65,7 @@ export default function CountryList() {
                     className="button"
                     variant="contained"
                     color="primary"
+                    onClick={() => dispatch(addCountryCart(country))}
                   >
                     ADD
                   </Button>

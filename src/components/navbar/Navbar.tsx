@@ -18,6 +18,8 @@ import ListItemText from '@mui/material/ListItemText'
 import SearchIcon from '@mui/icons-material/Search'
 import { Badge, InputBase } from '@mui/material'
 import Cart from '../cart/Cart'
+import { useSelector } from 'react-redux'
+import { AppState } from '../../types/Types'
 
 const drawerWidth = 240
 
@@ -113,6 +115,7 @@ export default function Navbar() {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   const [toggle, setToggle] = React.useState(false)
+  const cart = useSelector((state: AppState) => state.cartReducer.cart)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -151,7 +154,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 1 }} />
 
           <IconButton size="large" aria-label="show new items" color="inherit">
-            <Badge badgeContent={4} color="error">
+            <Badge badgeContent={cart && cart.length} color="error">
               <AddShoppingCartIcon onClick={() => setToggle(!toggle)} />
             </Badge>
           </IconButton>
