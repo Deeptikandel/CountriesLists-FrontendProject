@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -13,11 +13,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCountries, addCountryCart } from '../../redux/actions'
 import { ThemeContext } from '../../context/context'
 import { Country } from '../../types/CountryTypes'
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material'
 
 type countryListProps = {
   searchKey: string
 }
 export default function CountryList({ searchKey }: countryListProps) {
+  const [change, setChange] = useState(true)
   //getting all countries form redux
   const countries = useSelector(
     (state: AppState) => state.countryReducer.countries
@@ -40,6 +42,10 @@ export default function CountryList({ searchKey }: countryListProps) {
     setFilteredCountries(searchedCountries)
   }, [searchKey, countries])
 
+  const handleChangeOrder = () => {
+    filteredCountries.reverse()
+    setChange(!change)
+  }
   //init dispatch
   const dispatch = useDispatch()
   const { colorTheme } = useContext(ThemeContext)
@@ -53,7 +59,16 @@ export default function CountryList({ searchKey }: countryListProps) {
         <TableHead className="table-head">
           <TableRow>
             <TableCell>Flag</TableCell>
-            <TableCell align="right">Name</TableCell>
+            <TableCell align="right">
+              Name
+              <Button
+                onKeyDown={handleChangeOrder}
+                onClick={handleChangeOrder}
+                tabIndex={0}
+              >
+                <span>{change ? <ArrowUpward /> : <ArrowDownward />}</span>
+              </Button>
+            </TableCell>
             <TableCell align="right">Languages</TableCell>
             <TableCell align="right">Population</TableCell>
             <TableCell align="right">Region</TableCell>
