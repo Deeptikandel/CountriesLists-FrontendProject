@@ -5,4 +5,8 @@
     font-size: large;
     font-weight: 600;
   }
+  .button:disabled {
+    background-color: gray !important;
+    color: rgb(37, 35, 35);
+  }
 }

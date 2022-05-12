@@ -6,6 +6,7 @@ import { fetchAllCountries } from '../../redux/actions'
 
 const Home = () => {
   const [searchKey, setSearchKey] = React.useState('')
+  const disabled = false
   //handlechange event
 
   const handleSearch = (value: string) => {
@@ -20,7 +21,7 @@ const Home = () => {
   return (
     <>
       <Navbar handleSearch={handleSearch} />
-      <CountryList searchKey={searchKey} />
+      <CountryList searchKey={searchKey} disabled={disabled} />
     </>
   )
 }

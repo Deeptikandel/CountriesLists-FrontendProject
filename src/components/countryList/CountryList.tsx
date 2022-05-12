@@ -17,8 +17,10 @@ import { ArrowDownward, ArrowUpward } from '@mui/icons-material'
 
 type countryListProps = {
   searchKey: string
+  disabled: boolean
 }
-export default function CountryList({ searchKey }: countryListProps) {
+
+export default function CountryList({ searchKey, disabled }: countryListProps) {
   const [change, setChange] = useState(true)
   //getting all countries form redux
   const countries = useSelector(
@@ -27,6 +29,7 @@ export default function CountryList({ searchKey }: countryListProps) {
   const isLoading = useSelector(
     (state: AppState) => state.countryReducer.isLoading
   )
+  const cart = useSelector((state: AppState) => state.cartReducer.cart)
 
   const [filteredCountries, setFilteredCountries] = React.useState(countries)
 
@@ -106,6 +109,7 @@ export default function CountryList({ searchKey }: countryListProps) {
                     color="primary"
                     style={{ backgroundColor: colorTheme.code }}
                     onClick={() => dispatch(addCountryCart(country))}
+                    disabled={cart.includes(country) ? true : false}
                   >
                     ADD
                   </Button>
