@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Button, Typography } from '@mui/material'
+import { Button, IconButton, Typography } from '@mui/material'
 import './countryList.scss'
 import { AppState } from '../../types/Types'
 import { useDispatch, useSelector } from 'react-redux'
@@ -61,13 +61,13 @@ export default function CountryList({ searchKey }: countryListProps) {
             <TableCell>Flag</TableCell>
             <TableCell align="right">
               Name
-              <Button
+              <IconButton
                 onKeyDown={handleChangeOrder}
                 onClick={handleChangeOrder}
                 tabIndex={0}
               >
                 <span>{change ? <ArrowUpward /> : <ArrowDownward />}</span>
-              </Button>
+              </IconButton>
             </TableCell>
             <TableCell align="right">Languages</TableCell>
             <TableCell align="right">Population</TableCell>
