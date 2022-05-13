@@ -1,4 +1,12 @@
 import React, { useState, useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { AppState } from '../../types/Types'
+import { Country } from '../../types/CountryTypes'
+
+import { fetchAllCountries, addCountryCart } from '../../redux/actions'
+import { ThemeContext } from '../../context/context'
+
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -7,13 +15,11 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { Button, IconButton, Typography } from '@mui/material'
-import './countryList.scss'
-import { AppState } from '../../types/Types'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllCountries, addCountryCart } from '../../redux/actions'
-import { ThemeContext } from '../../context/context'
-import { Country } from '../../types/CountryTypes'
 import { ArrowDownward, ArrowUpward } from '@mui/icons-material'
+
+import { v4 as uuidv4 } from 'uuid'
+
+import './countryList.scss'
 
 type countryListProps = {
   searchKey: string
@@ -56,6 +62,7 @@ export default function CountryList({ searchKey, disabled }: countryListProps) {
   React.useEffect(() => {
     dispatch(fetchAllCountries())
   }, [dispatch])
+
   return (
     <TableContainer className="table-container" component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -82,10 +89,10 @@ export default function CountryList({ searchKey, disabled }: countryListProps) {
           {isLoading && <Typography>Loading...</Typography>}
           {!isLoading &&
             filteredCountries &&
-            filteredCountries.map((country: any, index) => (
+            filteredCountries.map((country: any) => (
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                key={index}
+                key={uuidv4()}
               >
                 <TableCell component="th" scope="row">
                   <img
@@ -109,7 +116,7 @@ export default function CountryList({ searchKey, disabled }: countryListProps) {
                     color="primary"
                     style={{ backgroundColor: colorTheme.code }}
                     onClick={() => dispatch(addCountryCart(country))}
-                    disabled={cart.includes(country) ? true : false}
+                    disabled={cart.includes(country) ? !disabled : disabled}
                   >
                     ADD
                   </Button>

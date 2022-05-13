@@ -1,10 +1,15 @@
 import React from 'react'
-import './cart.scss'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { AppState } from '../../types/Types'
-import DeleteIcon from '@mui/icons-material/Delete'
 import { removeCountryCart } from '../../redux/actions'
+
+import DeleteIcon from '@mui/icons-material/Delete'
 import { IconButton } from '@mui/material'
+
+import { v4 as uuidv4 } from 'uuid'
+
+import './cart.scss'
 
 const CartList = () => {
   const cart = useSelector((state: AppState) => state.cartReducer.cart)
@@ -12,13 +17,13 @@ const CartList = () => {
   const handleCartItemDel = (country: any) => {
     dispatch(removeCountryCart(country))
   }
-  console.log(cart)
+
   return (
     <div className="cart">
       {cart &&
-        cart.map((country: any, index) => {
+        cart.map((country: any) => {
           return (
-            <div className="cart-item" key={index}>
+            <div className="cart-item" key={uuidv4()}>
               <img
                 src={country.flags.svg}
                 alt={`${country.name}flag`}

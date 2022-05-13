@@ -1,8 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+
+import { fetchAllCountries } from '../../redux/actions'
+
 import CountryList from '../../components/countryList/CountryList'
 import Navbar from '../../components/navbar/Navbar'
-import { fetchAllCountries } from '../../redux/actions'
 
 const Home = () => {
   const [searchKey, setSearchKey] = React.useState('')

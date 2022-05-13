@@ -1,4 +1,9 @@
 import React, { useContext } from 'react'
+import { useSelector } from 'react-redux'
+
+import { ThemeContext, themes } from '../../context/context'
+import { AppState } from '../../types/Types'
+
 import { alpha, styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
@@ -17,10 +22,8 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import SearchIcon from '@mui/icons-material/Search'
 import { Badge, InputBase } from '@mui/material'
-import { useSelector } from 'react-redux'
-import { AppState } from '../../types/Types'
+
 import CartList from '../cart/Cart'
-import { ThemeContext, themes } from '../../context/context'
 
 const drawerWidth = 240
 
