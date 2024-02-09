@@ -2,7 +2,7 @@ import React from 'react'
 
 export const themes = {
   primary: {
-    color: 'Red',
+    color: 'Purple',
     code: '#800080',
   },
   secondary: {
